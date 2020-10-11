@@ -1,0 +1,23 @@
+h1 {
+	text-align: center;
+}
+
+.nav-link-item {
+	color: inherit;
+	text-decoration: none;
+}
+
+.nav-link-item:hover,
+.nav-link-item:active,
+.nav-link-item:visited {
+	text-decoration: none;
+}
+
+.nav-link-item.active {
+    color: #fff;
+    background-color: #3f51b5;
+}
+
+.MuiListItem-root.Mui-selected, .MuiListItem-root.Mui-selected:hover {
+    background-color: #3f51b5 !important;
+}

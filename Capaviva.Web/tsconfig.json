@@ -1,0 +1,46 @@
+{
+	"compilerOptions": {
+		"outDir": "./dist/",
+		"noImplicitAny": true,
+		"target": "es5",
+		"strictNullChecks": true,
+		"strict": true,
+		"esModuleInterop": true,
+		"lib": ["es5", "es6", "dom"],
+		"jsx": "react",
+		"allowJs": true,
+		"moduleResolution": "node",
+		"removeComments": true,
+		"alwaysStrict": true,
+		"allowUnreachableCode": false,
+		"noImplicitThis": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true,
+		"forceConsistentCasingInFileNames": true,
+		"importHelpers": true,
+		"baseUrl": "./",
+		"paths": {
+			"App/*": ["src/scripts/*"],
+			"Components/*": ["src/scripts/components/*"],
+			"Constants/*": ["src/scripts/constants/*"],
+			"Enums/*": ["src/scripts/enums/*"],
+			"Interfaces/*": ["src/scripts/interfaces/*"],
+			"Mappers/*": ["src/scripts/mappers/*"],
+			"Resources/*": ["src/scripts/resources/*"],
+			"Services/*": ["src/scripts/services/*"],
+			"Types/*": ["src/scripts/types/*"],
+			"Utilities/*": ["src/scripts/utilities/*"]
+		}
+	},
+	"exclude": [
+		"node_modules",
+		"build",
+		"webpack",
+		"jest"
+	],
+	"include": [
+		"src"
+	]
+}

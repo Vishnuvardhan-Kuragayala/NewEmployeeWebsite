@@ -1,0 +1,50 @@
+{
+	"tableHeaderData": {
+		"id": {
+			"displayName": "Id"
+		},
+		"name": {
+			"displayName": "Name"
+		},
+		"dateOfJoining": {
+			"displayName": "Date of joining"
+		},
+		"location": {
+			"displayName": "Location"
+		},
+		"team": {
+			"displayName": "Team"
+		}
+	},
+	"tableBodyData": {
+		"tableBody" : [
+		{
+			"id": 110,
+			"name": "Bill Jobs",
+			"dateOfJoining": "16 Aug, 2018",
+			"location": "Pune",
+			"team": "Web"
+		},
+		{
+			"id": 120,
+			"name": "Steve Musk",
+			"dateOfJoining": "18 May, 2014",
+			"location": "Hyderabad",
+			"team": "Web"
+		},
+		{
+			"id": 146,
+			"name": "Elon Bezos",
+			"dateOfJoining": "13 Aug, 2015",
+			"location": "Pune",
+			"team": "API"
+		},
+		{
+			"id": 170,
+			"name": "Jeff Gates",
+			"dateOfJoining": "26 June, 2016",
+			"location": "Hyderabad",
+			"team": "API"
+		}
+	]}
+}
