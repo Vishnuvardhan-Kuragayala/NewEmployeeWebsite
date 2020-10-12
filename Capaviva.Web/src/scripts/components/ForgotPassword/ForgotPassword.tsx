@@ -76,6 +76,7 @@ const ForgotPassword: React.FunctionComponent = () => {
 		setIsLoading(false);
 		setEmailSuccess(true);
 		setIsLoading(false);
+		window.location.replace("/resetpassword");
 
 		
 	};
@@ -95,6 +96,7 @@ const ForgotPassword: React.FunctionComponent = () => {
 		
 		setEmailSuccess(true);
 		setIsLoading(false);
+		window.location.replace("/resetpassword");
 
 		//HTTPService.request(UrlConstants.CHECK_EMAIL_URL,
 			//HttpRequestMethodType.POST, forgotPasswordModel, handleEmailSuccess, handleEmailError);
@@ -127,8 +129,8 @@ const ForgotPassword: React.FunctionComponent = () => {
 			
 					{isLoading && <LinearProgress />}
 					{error && <Alert message={error} title={Headings.errorAlertTitle} type={AlertType.ERROR} />}
-					{/*--disable when email successful -*/}
-					{!emailSuccess && <Button
+					
+					 <Button
 						fullWidth
 						variant={ButtonVariant.CONTAINED}
 						color={ButtonColor.PRIMARY}
@@ -136,18 +138,19 @@ const ForgotPassword: React.FunctionComponent = () => {
 						text={SignInUp.resetPassword}
 						cssClass={classes.submit}
 						onClick={() => {validateEmail();}}
-					/>}
+					/>
 					
 				</form>
 			</div>
-				{/*--disable when email successful -*/}
-			{!emailSuccess && <Box mt={8}>
+				
+			<Box mt={8}>
 				<Copyright
 					href={LinkConstants.EMPTY}
 					shouldDisplayCopyrightLink
 					text={CopyrightTitles.brandName} />
-			</Box>}
-			{emailSuccess && <ResetPassword confirmedEmail={email}/>}
+			</Box>
+
+			
 		</Container>
 	);
 };

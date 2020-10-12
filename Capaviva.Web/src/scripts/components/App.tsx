@@ -2,6 +2,7 @@ import React from "react";
 import "Styles/index.scss";
 import SignIn from "Components/SignIn/SignIn";
 import ForgotPassword from "Components/ForgotPassword/ForgotPassword";
+import ResetPassword from "Components/ResetPassword/ResetPassword";
 import EmployeeDetail from "Components/Details/EmployeeDetails";
 import Dashboard from "Components/Dashboard/Dashboard";
 import { Route, Switch } from "react-router-dom";
@@ -32,7 +33,7 @@ class App extends React.Component<any, IAppState> {
 
 		this.setState({ isUserLoggedIn: isUserLoggedIn, isLoading: false });
 
-		if (!isUserLoggedIn && (window.location.pathname !== "/" || window.location.hash.length) && (window.location.pathname !== "/forgotpassword" )) {
+		if (!isUserLoggedIn && (window.location.pathname !== "/" || window.location.hash.length) && (window.location.pathname !== "/forgotpassword" ) && (window.location.pathname !== "/resetpassword" )) {
 			window.location.replace("/");
 		}
 	}
@@ -47,8 +48,11 @@ class App extends React.Component<any, IAppState> {
 					<Route path="/" exact>
 						<SignIn />
 					</Route>
-					<Route path="/forgotPassword" exact>
+					<Route path="/forgotpassword" exact>
 						<ForgotPassword />
+					</Route>
+					<Route path="/resetpassword" exact>
+						<ResetPassword />
 					</Route>
 				</Switch>}
 				{isUserLoggedIn && <Dashboard>

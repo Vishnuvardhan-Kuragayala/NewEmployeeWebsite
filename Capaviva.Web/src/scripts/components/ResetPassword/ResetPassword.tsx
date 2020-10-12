@@ -31,6 +31,7 @@ import { IResetPasswordModel, resetPasswordProps } from "Interfaces/ForgotPasswo
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { Alert } from "Components/Elements";
 import SessionService from "Services/session.service";
+import Container from "@material-ui/core/Container";
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -52,9 +53,9 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-const ResetPassword: React.FunctionComponent<resetPasswordProps> = ({ confirmedEmail }):ReactElement => {
+const ResetPassword: React.FunctionComponent= () => {
 	const classes = useStyles();
-	const [email, setEmail] = React.useState(confirmedEmail);
+	const [email, setEmail] = React.useState("");
 	const [password, setPassword] = React.useState("");
 	const [confirmPassword, setConfirmPassword] = React.useState("");
 	const [isLoading, setIsLoading] = React.useState(false);
@@ -93,7 +94,8 @@ const ResetPassword: React.FunctionComponent<resetPasswordProps> = ({ confirmedE
 	};
 
 	return (
-		<div>
+	
+			<Container component="main" maxWidth="xs">
 			<CssBaseline/>
 			<div className={classes.paper}>
 				<Typography component="h1" variant={TypographyVariant.H5}>
@@ -145,7 +147,7 @@ const ResetPassword: React.FunctionComponent<resetPasswordProps> = ({ confirmedE
 					shouldDisplayCopyrightLink
 					text={CopyrightTitles.brandName} />
 			</Box>
-		</div>
+			</Container>
 	);
 };
 
