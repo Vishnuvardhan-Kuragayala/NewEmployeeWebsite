@@ -146,7 +146,7 @@ const SignIn: React.FunctionComponent = () => {
 					/>
 					<Grid container>
 						<Grid item xs>
-							<Link href={LinkConstants.FORGOTPASSWORD} text={SignInUp.forgotPassword} />
+							<Link href={LinkConstants.FORGOT_PASSWORD} text={SignInUp.forgotPassword} />
 						</Grid>
 						<Grid item>
 							<Link href={LinkConstants.EMPTY} text={SignInUp.signUp} />

@@ -1,7 +1,7 @@
 
 const LinkConstants = {
 	EMPTY: "#",
-	FORGOTPASSWORD: "forgotpassword"
+	FORGOT_PASSWORD: "forgotpassword"
 };
 
 export default LinkConstants;

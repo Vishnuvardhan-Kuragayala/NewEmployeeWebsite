@@ -33,7 +33,9 @@ class App extends React.Component<any, IAppState> {
 
 		this.setState({ isUserLoggedIn: isUserLoggedIn, isLoading: false });
 
-		if (!isUserLoggedIn && (window.location.pathname !== "/" || window.location.hash.length) && (window.location.pathname !== "/forgotpassword" ) && (window.location.pathname !== "/resetpassword" )) {
+		if (!isUserLoggedIn && (window.location.pathname !== "/" || window.location.hash.length) &&
+		(window.location.pathname !== "/forgotpassword") &&
+		(window.location.pathname !== "/resetpassword")) {
 			window.location.replace("/");
 		}
 	}
