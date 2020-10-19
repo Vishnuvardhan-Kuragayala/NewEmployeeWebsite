@@ -26,7 +26,7 @@ import { AlertType } from "Enums/elements";
 import Headings from "Resources/headings.resource";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { Alert } from "Components/Elements";
-
+import SessionService from '../../services/session.service';
 const useStyles = makeStyles((theme) => ({
 	paper: {
 		marginTop: theme.spacing(8),

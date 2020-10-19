@@ -56,11 +56,11 @@ const ResetPassword: React.FunctionComponent = () => {
 	const resetPassword = () => {
 		setIsLoading(true);
 
-		let ResetPasswordModel : IResetPasswordModel = {
+		/*let ResetPasswordModel : IResetPasswordModel = {
 			confirmedEmail: email,
 			password: password,
 			confirmpassword: confirmPassword
-		};
+		};*/
 
 		if(password!=confirmPassword)
 		{ 
@@ -87,7 +87,7 @@ const ResetPassword: React.FunctionComponent = () => {
 				</Typography>
 				<form className={classes.form} noValidate>
 					<Textbox fullWidth
-						id={SignInSelectors.NEWPASSWORD}
+						id={SignInSelectors.NEW_PASSWORD}
 						label={SignInUp.newPassword}
 						margin={TextboxMargin.NORMAL}
 						name="newPassword"
@@ -99,7 +99,7 @@ const ResetPassword: React.FunctionComponent = () => {
 					/>
 					<Textbox
 						fullWidth
-						id={SignInSelectors.CONFIRMPASSWORD}
+						id={SignInSelectors.CONFIRM_PASSWORD}
 						label={SignInUp.confirmPassword}
 						margin={TextboxMargin.NORMAL}
 						name="confirmPassword"
