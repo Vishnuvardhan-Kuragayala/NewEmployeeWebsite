@@ -51,12 +51,31 @@ const ResetPassword: React.FunctionComponent = () => {
 	const [confirmPassword, setConfirmPassword] = React.useState("");
 	const [isLoading, setIsLoading] = React.useState(false);
 	const [error, setError] = React.useState("");
+	const [passwordError,setPasswordError]= React.useState("");
 
 	const resetPassword = () => {
 		setIsLoading(true);
-		setError("");
-		setIsLoading(false);
-		console.log("email and password", email, confirmPassword, password);
+
+		let ResetPasswordModel : IResetPasswordModel = {
+			confirmedEmail: email,
+			password: password,
+			confirmpassword: confirmPassword
+		};
+
+		if(password!=confirmPassword)
+		{ 
+			setPasswordError("Passwords dont match");
+			setIsLoading(false);
+		}else{
+			setPasswordError("");
+			setError("");
+			setIsLoading(false);
+			console.log("email and password",email,confirmPassword,password)
+		}
+		
+		
+		//HTTPService.request(UrlConstants.RESET_PASSWORD_URL,
+			//HttpRequestMethodType.POST, ResetPasswordModel, handleResetSuccess, handleResetError);
 	};
 
 	return (
@@ -84,11 +103,14 @@ const ResetPassword: React.FunctionComponent = () => {
 						label={SignInUp.confirmPassword}
 						margin={TextboxMargin.NORMAL}
 						name="confirmPassword"
-						onChange={(e) => {setConfirmPassword(e.target.value);}}
+						onChange={(e) => {setConfirmPassword(e.target.value)}}
+						
 						required
 						value={confirmPassword}
 						type={InputType.PASSWORD}
-						variant={TextboxVariant.OUTLINED}/>
+						variant={TextboxVariant.OUTLINED}
+					/> 
+					<div className="text-danger">{passwordError}</div>
 					{isLoading && <LinearProgress />}
 					{error && <Alert message={error} title={Headings.errorAlertTitle} type={AlertType.ERROR} />}
 					<Button
