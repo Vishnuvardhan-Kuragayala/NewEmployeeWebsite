@@ -63,6 +63,8 @@ const SignIn: React.FunctionComponent = () => {
 	const [password, setPassword] = React.useState("");
 	const [isLoading, setIsLoading] = React.useState(false);
 	const [error, setError] = React.useState("");
+	const [emailError,setEmailError] = React.useState("");
+	const [passwordError,setPasswordError] = React.useState("");
 
 	const handleLoginSuccess = (response: IHTTPResponse) => {
 		if (response.data) {
@@ -79,17 +81,56 @@ const SignIn: React.FunctionComponent = () => {
 		console.log(err.message);
 		setIsLoading(false);
 	};
+	const validateEmail = (email: any) => {
+		
+	
+		var pattern = new RegExp(/^(("[\w-\s.]+")|([\w-.]+(?:[\w-.]+)*)|("[\w-\s.]+")([\w-.]+(?:[\w-.]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+		 if (pattern.test(email))
+		  {
+			
+			setEmailError("");
+			return Promise.resolve();
+		  }else{
+			
+			setEmailError("Please enter valid email.");
+			return Promise.reject();
 
+		}
+
+	}
+
+	const validatePassword = (password:any) =>
+	{
+		if(password==="")
+		{	setPasswordError("Please enter password");
+			return Promise.reject();
+		}else{
+			setPasswordError("");
+			return Promise.resolve();
+		
+		}
+	}
 	const validateLogin = () => {
 		setIsLoading(true);
+		setError("");
 
 		let signInModel: ISignInModel = {
 			email: email,
 			password: password
 		};
+		
+		Promise.all([validatePassword(password),validateEmail(email)]).then(()=>{
+			
+				console.log(password, email);
+			HTTPService.request(UrlConstants.SIGN_IN_URL,
+				HttpRequestMethodType.POST, signInModel, handleLoginSuccess, handleLoginError);}
+	
+		,()=>{
+			setIsLoading(false);
+		});
 
-		HTTPService.request(UrlConstants.SIGN_IN_URL,
-			HttpRequestMethodType.POST, signInModel, handleLoginSuccess, handleLoginError);
+		
+
 	};
 
 	return (
@@ -116,6 +157,7 @@ const SignIn: React.FunctionComponent = () => {
 						value={email}
 						variant={TextboxVariant.OUTLINED}
 					/>
+					<div className="text-danger">{emailError}</div>
 					<Textbox
 						autoComplete={AutoCompleteConstants.CURRENT_PASSWORD}
 						fullWidth
@@ -129,11 +171,14 @@ const SignIn: React.FunctionComponent = () => {
 						value={password}
 						variant={TextboxVariant.OUTLINED}
 					/>
+					<div className="text-danger">{passwordError}</div>
 					<FormControlLabel
 						control={<Checkbox value="remember" color={LinkColor.PRIMARY} />}
 						label={SignInUp.rememberMe}
 					/>
 					{isLoading && <LinearProgress />}
+					
+					
 					{error && <Alert message={error} title={Headings.errorAlertTitle} type={AlertType.ERROR} />}
 					<Button
 						fullWidth
