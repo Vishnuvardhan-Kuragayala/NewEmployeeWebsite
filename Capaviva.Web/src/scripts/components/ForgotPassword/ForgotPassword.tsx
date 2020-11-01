@@ -84,11 +84,16 @@ const ForgotPassword: React.FunctionComponent = () => {
 		  {
 			setEmail(email);
 			setEmailError("");
-		  }else{
+		  }else if(email === ""){
+			
+			setEmailError("Please enter email.");
+			setEmail(email);
+		}else{
 			
 			setEmailError("Please enter valid email.");
 			setEmail(email);
 		}
+		
 
 	}
 
@@ -104,11 +109,12 @@ const ForgotPassword: React.FunctionComponent = () => {
 		{
 		
 		setIsLoading(false);
-		setError("");
+	
 		window.location.replace("/resetpassword");}
 		else{
+			setEmailError("Please enter email.");
 			setIsLoading(false);
-			setError("Please verify your details");
+			
 		}
 
 		//HTTPService.request(UrlConstants.CHECK_EMAIL_URL,
@@ -143,7 +149,7 @@ const ForgotPassword: React.FunctionComponent = () => {
 					<div className="text-danger">{emailError}</div>
 
 					{isLoading && <LinearProgress />}
-					{error && <Alert message={error} title={Headings.errorAlertTitle} type={AlertType.ERROR} />}
+					
 					<Button
 						fullWidth
 						variant={ButtonVariant.CONTAINED}
