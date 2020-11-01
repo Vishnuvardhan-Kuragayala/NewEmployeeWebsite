@@ -33,11 +33,11 @@ class App extends React.Component<any, IAppState> {
 
 		this.setState({ isUserLoggedIn: isUserLoggedIn, isLoading: false });
 
-		if (!isUserLoggedIn && (window.location.pathname !== "/" || window.location.hash.length) &&
+		/*if (!isUserLoggedIn && (window.location.pathname !== "/" || window.location.hash.length) &&
 		(window.location.pathname !== "/forgotpassword") &&
 		(window.location.pathname !== "/resetpassword")) {
 			window.location.replace("/");
-		}
+		}*/
 	}
 
 	render() {
@@ -56,15 +56,21 @@ class App extends React.Component<any, IAppState> {
 					<Route path="/resetpassword" exact>
 						<ResetPassword />
 					</Route>
+					<Route path="/createEmployee" exact>
+							<CreateEmployee />
+						</Route>
+					{Routes.map((route: any) => (
+							<Route exact path={route.path} key={route.path}>
+								<route.component />
+							</Route>
+						))}
 				</Switch>}
 				{isUserLoggedIn && <Dashboard>
 					<Switch>
 						<Route path="/" exact>
 							<EmployeeDetail />
 						</Route>
-						<Route path="/createEmployee" exact>
-							<CreateEmployee />
-						</Route>
+						
 						<Route path="/createProfessional" exact>
 							<CreateProfessionalDetailsForm />
 						</Route>
@@ -74,11 +80,7 @@ class App extends React.Component<any, IAppState> {
 						<Route path="/createTrack" exact>
 							<CreateTrackDetailsForm />
 						</Route>
-						{Routes.map((route: any) => (
-							<Route exact path={route.path} key={route.path}>
-								<route.component />
-							</Route>
-						))}
+						
 					</Switch>
 				</Dashboard>}
 			</React.Fragment>}

@@ -89,11 +89,11 @@ const SignIn: React.FunctionComponent = () => {
 		  {
 			
 			setEmailError("");
-			return Promise.resolve();
+			return true;
 		  }else{
 			
 			setEmailError("Please enter valid email.");
-			return Promise.reject();
+			return false;
 
 		}
 
@@ -103,10 +103,10 @@ const SignIn: React.FunctionComponent = () => {
 	{
 		if(password==="")
 		{	setPasswordError("Please enter password");
-			return Promise.reject();
+			return false;
 		}else{
 			setPasswordError("");
-			return Promise.resolve();
+			return true;
 		
 		}
 	}
@@ -119,7 +119,7 @@ const SignIn: React.FunctionComponent = () => {
 			password: password
 		};
 		
-		Promise.all([validatePassword(password),validateEmail(email)]).then(()=>{
+		/*Promise.all([validatePassword(password),validateEmail(email)]).then(()=>{
 			
 				console.log(password, email);
 			HTTPService.request(UrlConstants.SIGN_IN_URL,
@@ -127,7 +127,18 @@ const SignIn: React.FunctionComponent = () => {
 	
 		,()=>{
 			setIsLoading(false);
-		});
+		});*/
+
+		if(validateEmail(email) && validatePassword(password))
+		{
+			
+		setIsLoading(false);
+		window.location.replace("/");
+
+		}else{
+			
+			setIsLoading(false);
+		}
 
 		
 

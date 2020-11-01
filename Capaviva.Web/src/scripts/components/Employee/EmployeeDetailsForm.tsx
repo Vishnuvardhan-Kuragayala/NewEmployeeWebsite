@@ -38,6 +38,7 @@ const EmployeeDetailsForm: React.FunctionComponent<IEmployeeDetailsProps> = (pro
 	const [additionalContact, setAdditionalContact] = React.useState('');
 	const [dayOfBirth, setDayOfBirth] = React.useState('');
 	const [monthOfBirth, setMonthOfBirth] = React.useState('');
+	const [errorFound, setErrorFound] = React.useState(false);
 
 	const handleChange = (handler: any, event: any) => {
 		handler(event.target.value);
@@ -64,6 +65,153 @@ const EmployeeDetailsForm: React.FunctionComponent<IEmployeeDetailsProps> = (pro
 		return employeeDetailsModel;
 	};
 
+	
+
+	const validateForm = () => {
+		
+		//employeeID validation
+		if(employeeId === '') {
+			setErrorFor("employeeId", 'EmployeeId cannot be blank');
+		} else if(employeeId.length !=6){
+			setErrorFor("employeeId", 'Not a valid employeeId');
+		 }
+			else {
+			setSuccessFor("employeeId");
+		}
+		//corpID validation
+		if(corpId === '') {
+			setErrorFor("corpId", 'CorpId cannot be blank');
+		} else {
+			setSuccessFor("corpId");
+		}
+
+		//racfID validation
+		if(racfId === '') {
+			setErrorFor("racfId", 'RacfId cannot be blank');
+		} else {
+			setSuccessFor("racfId");
+		}
+
+		//firstName validation
+		if(firstName === '') {
+			setErrorFor("firstName", 'First Name cannot be blank');
+		} else if (!isAlphaOnly(firstName)) {
+			setErrorFor("firstName", 'Not a valid First Name');
+		} else {
+			setSuccessFor("firstName");
+		}
+
+		//lastName validation
+		if(lastName === '') {
+			setErrorFor("lastName", 'Last Name cannot be blank');
+		} else if (!isAlphaOnly(lastName)) {
+			setErrorFor("lastName", 'Not a valid Last Name');
+		} else {
+			setSuccessFor("lastName");
+		}
+		
+		//mobile validation
+		if(mobile === '') {
+			setErrorFor("mobile", 'Mobile number cannot be blank');
+		}else if(mobile.length !=10){
+			setErrorFor("mobile", 'Not a valid Mobile Number');
+		 }else {
+			setSuccessFor("mobile");
+		}
+
+		//title validation
+		if(title === '') {
+			setErrorFor("title", 'Title cannot be blank');
+		}else {
+			setSuccessFor("title");
+		}	
+
+		//roleName validation
+		if(roleName === ''){
+			setErrorFor("roleName", 'Role Name cannot be blank');
+		}else {
+			setSuccessFor("roleName");
+		}	
+		
+		//dayOfBirth validation
+		if(dayOfBirth === ''){
+			setErrorFor("dayOfBirth", 'Date of Birth cannot be blank');
+		}else {
+			setSuccessFor("dayOfBirth");
+		}	
+
+		//monthOfBirth validation
+		if(monthOfBirth === ''){
+			setErrorFor("monthOfBirth", 'Month of Birth cannot be blank');
+		}else {
+			setSuccessFor("monthOfBirth");
+		}
+		
+	
+
+
+		//Email validation
+		if(email === '') {
+			setErrorFor("email", 'Email cannot be blank');
+		} else if (!isEmail(email)) {
+			setErrorFor("email", 'Not a valid email');
+		} else {
+			setSuccessFor("email");
+		}
+
+		if(errorFound === false)
+		{
+			return true
+		}else{
+			return false;
+		}
+		
+	}
+	
+	function setErrorFor(input:any, message:any) {
+			const small = document.querySelector(`small[id='${input}']`);
+			console.log("small", small);
+			if(small)
+			{console.log("in");
+			small.innerHTML = message}
+			
+		//formControl.className = 'form-control error';
+		setErrorFound(true);
+	}
+	
+	function setSuccessFor(input:any) {
+		const small = document.querySelector(`small[id='${input}']`);
+			console.log("small", small);
+			if(small)
+			{console.log("in");
+			small.innerHTML = "";}
+		
+	}
+		
+	function isEmail(email:any) {
+		return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
+	}
+	
+	function isAlphaOnly(input:any)
+	{
+		return /^[A-Za-z]+$/.test(input);
+	}
+
+	
+	const saveEmployee = () => {
+
+		if(validateForm())
+		{
+		() => props.setEmployeeDetailsModel(getEmployeeDetailsModel());
+	return true;
+}
+		else
+		{
+			return false;
+		}
+
+	}
+
 	return (
 		<React.Fragment>
 			<Grid container spacing={3}>
@@ -79,6 +227,8 @@ const EmployeeDetailsForm: React.FunctionComponent<IEmployeeDetailsProps> = (pro
 						value={employeeId.toString()}
 						variant={TextboxVariant.STANDARD}
 					/>
+				
+					<small id="employeeId" className="text-danger"></small>
 				</Grid>
 				<Grid item xs={12} sm={6}>
 					<Textbox
@@ -92,6 +242,7 @@ const EmployeeDetailsForm: React.FunctionComponent<IEmployeeDetailsProps> = (pro
 						value={corpId}
 						variant={TextboxVariant.STANDARD}
 					/>
+					<small id="corpId" className="text-danger"></small>
 				</Grid>
 				<Grid item xs={12} sm={6}>
 					<Textbox
@@ -105,6 +256,7 @@ const EmployeeDetailsForm: React.FunctionComponent<IEmployeeDetailsProps> = (pro
 						value={racfId}
 						variant={TextboxVariant.STANDARD}
 					/>
+					<small id="racfId" className="text-danger"></small>
 				</Grid>
 				<Grid item xs={12} sm={6}>
 					<Textbox
@@ -118,6 +270,7 @@ const EmployeeDetailsForm: React.FunctionComponent<IEmployeeDetailsProps> = (pro
 						value={email}
 						variant={TextboxVariant.STANDARD}
 					/>
+					<small id="email" className="text-danger"></small>
 				</Grid>
 				<Grid item xs={12} sm={2}>
 					<FormControl className={classes.selectForm}>
@@ -134,7 +287,9 @@ const EmployeeDetailsForm: React.FunctionComponent<IEmployeeDetailsProps> = (pro
 							<MenuItem value={"Mrs"}>Mrs</MenuItem>
 
 						</Select>
+						<small id="title" className="text-danger"></small>
 					</FormControl>
+				
 				</Grid>
 				<Grid item xs={12} sm={5}>
 					<Textbox
@@ -148,6 +303,7 @@ const EmployeeDetailsForm: React.FunctionComponent<IEmployeeDetailsProps> = (pro
 						value={firstName}
 						variant={TextboxVariant.STANDARD}
 					/>
+					<small id="firstName" className="text-danger"></small>
 				</Grid>
 				<Grid item xs={12} sm={5}>
 					<Textbox
@@ -161,6 +317,7 @@ const EmployeeDetailsForm: React.FunctionComponent<IEmployeeDetailsProps> = (pro
 						value={lastName}
 						variant={TextboxVariant.STANDARD}
 					/>
+					<small id="lastName" className="text-danger"></small>
 				</Grid>
 				<Grid item xs={12} sm={6}>
 					<FormControl className={classes.selectForm}>
@@ -177,6 +334,7 @@ const EmployeeDetailsForm: React.FunctionComponent<IEmployeeDetailsProps> = (pro
 							<MenuItem value={".net"}>.Net</MenuItem>
 
 						</Select>
+						<small id="scrumTeamName" className="text-danger"></small>
 					</FormControl>
 				</Grid>
 				<Grid item xs={12} sm={6}>
@@ -195,8 +353,9 @@ const EmployeeDetailsForm: React.FunctionComponent<IEmployeeDetailsProps> = (pro
 							<MenuItem value={"consultant"}>Consultant</MenuItem>
 							<MenuItem value={"seniorConsultant"}>Senior Consultant</MenuItem>
 						</Select>
-
+						<small id="roleName" className="text-danger"></small>
 					</FormControl>
+					
 				</Grid>
 				<Grid item xs={12} sm={6}>
 					<Textbox
@@ -209,6 +368,7 @@ const EmployeeDetailsForm: React.FunctionComponent<IEmployeeDetailsProps> = (pro
 						value={deskNumber}
 						variant={TextboxVariant.STANDARD}
 					/>
+					<small id="deskNumber" className="text-danger"></small>
 				</Grid>
 				<Grid item xs={12} sm={6}>
 					<Textbox
@@ -221,6 +381,7 @@ const EmployeeDetailsForm: React.FunctionComponent<IEmployeeDetailsProps> = (pro
 						value={extension}
 						variant={TextboxVariant.STANDARD}
 					/>
+					<small id="extn" className="text-danger"></small>
 				</Grid>
 				<Grid item xs={12} sm={6}>
 					<Textbox
@@ -234,6 +395,7 @@ const EmployeeDetailsForm: React.FunctionComponent<IEmployeeDetailsProps> = (pro
 						value={mobile}
 						variant={TextboxVariant.STANDARD}
 					/>
+					<small id="mobile" className="text-danger"></small>
 				</Grid>
 				<Grid item xs={12} sm={6}>
 					<Textbox
@@ -246,6 +408,7 @@ const EmployeeDetailsForm: React.FunctionComponent<IEmployeeDetailsProps> = (pro
 						value={additionalContact}
 						variant={TextboxVariant.STANDARD}
 					/>
+					<small id="additionalContact" className="text-danger"></small>
 				</Grid>
 				<Grid item xs={12} sm={6}>
 					<FormControl className={classes.selectForm}>
@@ -289,7 +452,9 @@ const EmployeeDetailsForm: React.FunctionComponent<IEmployeeDetailsProps> = (pro
 							<MenuItem value="30">30</MenuItem>
 							<MenuItem value="31">31</MenuItem>
 						</Select>
+						<small id="dayOfBirth" className="text-danger"></small>
 					</FormControl>
+					
 					<FormControl className={classes.selectForm}>
 						<InputLabel id="demo-simple-select-label">Month</InputLabel>
 						<Select
@@ -312,7 +477,9 @@ const EmployeeDetailsForm: React.FunctionComponent<IEmployeeDetailsProps> = (pro
 							<MenuItem value={11}>November</MenuItem>
 							<MenuItem value={12}>December</MenuItem>
 						</Select>
+						<small id="monthOfBirth" className="text-danger"></small>
 					</FormControl>
+					
 				</Grid>
 			</Grid>
 			<React.Fragment>
@@ -321,7 +488,7 @@ const EmployeeDetailsForm: React.FunctionComponent<IEmployeeDetailsProps> = (pro
 					<Button
 						variant={ButtonVariant.CONTAINED}
 						color={ButtonColor.PRIMARY}
-						onClick={() => props.setEmployeeDetailsModel(getEmployeeDetailsModel())}
+						onClick={(e) => saveEmployee()}
 						cssClass={classes.button}
 						text={"Save Employee"}
 					/>
